@@ -1,6 +1,6 @@
 <template>
 	<view class="content">
-		<image class="logo" src="/static/logo.png"></image>
+		<image class="logo flex" src="/static/logo.png"></image>
 		<view>
 			<text class="title">{{title}}</text>
 		</view>
@@ -18,8 +18,6 @@ export default {
 	onLoad() {
 		new User().getUserInfo({
 			test: 123
-		}, {
-			errorToast: false
 		}).catch(err => {
 
 		})
@@ -30,7 +28,7 @@ export default {
 }
 </script>
 
-<style>
+<style lang="scss">
 .content {
 	display: flex;
 	flex-direction: column;

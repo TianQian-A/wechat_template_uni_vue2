@@ -65,7 +65,9 @@
     "@dcloudio/uni-stat": "^2.0.1-33920220208001",
     "@vue/shared": "^3.0.0",
     "core-js": "^3.6.5",
+    "dayjs": "^1.10.8",
     "flyio": "^0.6.2",
+    "lodash": "^4.17.21",
     "regenerator-runtime": "^0.12.1",
     "vue": "^2.6.11",
     "vuex": "^3.2.0"
@@ -91,6 +93,8 @@
     "mini-types": "*",
     "miniprogram-api-typings": "*",
     "postcss-comment": "^2.0.0",
+    "sass": "^1.49.9",
+    "sass-loader": "^12.6.0",
     "vue-template-compiler": "^2.6.11"
   },
   "browserslist": [

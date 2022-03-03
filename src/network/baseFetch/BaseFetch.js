@@ -58,8 +58,8 @@ export default class BaseFetch {
                 })
             })
             .catch(error => {
-                if (!error.hasOwnProperty('code')) error = { code: error.statusCode, msg: '网络错误' };
-                BaseFetch._PrintInfo(url, '请求错误', error);
+                if (!error.hasOwnProperty('code')) error = { code: -1, msg: '网络错误' };
+                BaseFetch._PrintInfo(url, error.code === -1 ? '网络错误' : '请求错误', error);
                 return handleError(errorToast, error);
             })
     }

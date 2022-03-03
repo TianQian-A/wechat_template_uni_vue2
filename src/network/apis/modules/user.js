@@ -3,7 +3,7 @@ export class User extends BaseFetch {
     /**
      * 请求 User 相关接口
      */
-    constructor() {
+    constructor(options) {
         super();
         // 可配置该接口统一的 errorToast 和 header
         this.options = options || {};
