@@ -35,9 +35,9 @@ export default class BaseFetch {
      * @param data
      * @param errorToast 是否展示错误弹窗
      * @param header
-     * @returns { Promise }
+     * @returns { Promise<Promise> }
      */
-    static request(url, { method = 'POST', data = {}, errorToast = BaseFetch._Config.errorToast, header = {} } = options) {
+    static _Request(url, { method = 'POST', data = {}, errorToast = BaseFetch._Config.errorToast, header = {} } = options) {
         url = url[0] === '/' ? process.env.VUE_APP_BASE_URL + url : url;
         data = BaseFetch._FilterEmpty(data);
         return uni.request({
@@ -64,7 +64,7 @@ export default class BaseFetch {
             })
     }
     // 判断参数类型是否符合要求
-    static checkBefore(url, data, options) {
+    static _CheckBefore(url, data, options) {
         return new Promise((resolve, reject) => {
             // 判断 url
             if (BaseFetch._ToType(url) !== 'string') return reject(new Error('url must be a string'));
@@ -77,19 +77,24 @@ export default class BaseFetch {
     }
 
     /**
+     * 请求成功返回的必带参数
+     * @typedef {Object} requestRes
+     * @property {Object} data
+     * @property {number} code
+     */
+    /**
      * post 请求
      * @param url
      * @param data
      * @param {Object} options 可配置请求的 errorToast 和 header,并且可覆盖 method 和 data
-     * @returns {Promise<Promise>}
+     * @returns {Promise.<requestRes>}
      */
-    post(url, data = {}, options = {}) {
-        return BaseFetch.checkBefore(url, data, options).then(() => {
-            return BaseFetch.request(url, {
-                method: 'POST',
-                data,
-                ...options
-            });
+    async post(url, data = {}, options = {}) {
+        await BaseFetch._CheckBefore(url, data, options);
+        return BaseFetch._Request(url, {
+            method: 'POST',
+            data,
+            ...options
         });
     }
 
@@ -98,15 +103,14 @@ export default class BaseFetch {
      * @param url
      * @param data
      * @param {Object} options 可配置请求的 errorToast 和 header,并且可覆盖 method 和 data
-     * @returns {Promise<Promise>}
+     * @returns {Promise.<requestRes>}
      */
-    get(url, data = {}, options = {}) {
-        return BaseFetch.checkBefore(url, data, options).then(() => {
-            return BaseFetch.request(url, {
-                method: 'GET',
-                data,
-                ...options
-            });
+    async get(url, data = {}, options = {}) {
+        await BaseFetch._CheckBefore(url, data, options);
+        return BaseFetch._Request(url, {
+            method: 'GET',
+            data,
+            ...options
         });
     }
 }

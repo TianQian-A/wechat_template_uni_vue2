@@ -20,6 +20,8 @@ export default {
 			test: 123
 		}, {
 			errorToast: false
+		}).catch(err => {
+
 		})
 	},
 	methods: {
